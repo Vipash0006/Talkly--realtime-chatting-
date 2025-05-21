@@ -23,11 +23,17 @@ export const logout = async () => {
 };
 
 export const getAuthUser = async () => {
+  console.log("Making request to get authenticated user...");
   try {
     const res = await axiosInstance.get("/api/auth/me");
+    console.log("Auth user response:", res.status, res.data ? "Has user data" : "No user data");
     return res.data;
   } catch (error) {
-    console.log("Error in getAuthUser:", error);
+    if (error?.response?.status !== 401) {
+      console.log("Error in getAuthUser:", error);
+    } else {
+      console.log("User not authenticated (401)");
+    }
     return null;
   }
 };
@@ -68,6 +74,25 @@ export async function acceptFriendRequest(requestId) {
 }
 
 export async function getStreamToken() {
-  const response = await axiosInstance.get("/api/chat/token");
-  return response.data;
+  console.log("Making request to get Stream token...");
+  try {
+    const response = await axiosInstance.get("/api/chat/token");
+    console.log("Stream token response:", response.status, response.data ? "Has token" : "No token data");
+    return response.data;
+  } catch (error) {
+    console.error("Error getting Stream token:", error);
+    throw error;
+  }
+}
+
+export async function getStreamVideoToken() {
+  console.log("Making request to get Stream video token...");
+  try {
+    const response = await axiosInstance.get("/api/chat/video-token");
+    console.log("Stream video token response:", response.status, response.data ? "Has token" : "No token data");
+    return response.data;
+  } catch (error) {
+    console.error("Error getting Stream video token:", error);
+    throw error;
+  }
 }

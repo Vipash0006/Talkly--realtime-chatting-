@@ -17,7 +17,11 @@ const __dirname = path.resolve();
 
 // CORS configuration
 const allowedOrigins = [
-  "http://localhost:5173", // Development
+  "http://localhost:5173", // Vite dev server
+  "http://localhost:3000", // Alternative dev port
+  "http://localhost:4000", // Alternative dev port 
+  "http://localhost:4173", // Vite preview
+  "http://localhost:5000", // Same port as backend
   "https://talkly-chat.vercel.app", // Vercel frontend
   "https://real-chat-lac.vercel.app", // Alternative Vercel frontend
   process.env.FRONTEND_URL, // Additional frontend URL from env
